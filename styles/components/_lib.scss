@@ -1,0 +1,46 @@
+.limiter {
+    width: 100%;
+    height: max-content;
+    max-width: $limiter;
+    margin: 0 auto;
+    padding: 0 $padding;
+    @include flex_row-center;
+}
+
+.main-container {
+    max-width: $suppdesktop;
+    margin: 0 auto;
+    min-height: 100vh;
+    @include grid-template-columns;
+
+    & > article {
+        width: 340px;
+        height: 360px;
+        margin: 10px auto;
+        border: 1px solid rgba($color: $blackColor, $alpha: .3);
+        border-radius: $border-radius;
+        transition: all .1s ease-in-out;
+        cursor: pointer;
+        @include flex_center-column;
+        & > a {
+            width: max-content;
+            height: max-content;
+
+            & > img {
+                width: 100%;
+                max-width: 220px;
+                height: auto;
+                object-fit: cover;
+                transition: all .3s linear;
+            }    
+        }
+    }
+
+    & > article:hover {
+        transform: translateY(-5px);
+    }
+
+    & > article:hover img {
+        transform: scale(1.2);
+    }
+}

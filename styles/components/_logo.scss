@@ -1,0 +1,8 @@
+.figure-logo {
+    @include flex-center;
+    & > h3 {
+        font-weight: bold;
+        color: $blackColor;
+        font-size: 1.4rem;
+    }
+}

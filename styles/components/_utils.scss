@@ -1,0 +1,27 @@
+@mixin flex-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex_center-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex_row-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin grid-template-columns {
+    display: grid;
+    grid-template-columns: 
+        repeat(auto-fill, 
+        minmax(400px, 2fr));
+}
