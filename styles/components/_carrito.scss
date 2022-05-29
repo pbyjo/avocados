@@ -1,0 +1,22 @@
+.carrito {
+    @include flex-center;
+
+    width: max-content;
+    height: max-content;
+    padding: calc($padding / 1.5);
+    border-radius: $border-radius;
+    background-color: $primaryColor;
+    cursor: pointer;
+    transition: .1s ease-in-out;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    
+    & > p {
+        font-weight: bold;
+        color: $whiteColor;
+        margin-left: calc($marginGlobal / 2);
+    }
+}
+
+.carrito:hover {
+    background-color: $secondaryColor;
+}

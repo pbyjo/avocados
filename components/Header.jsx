@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 /* Components */
 import Logo from '@elements/Logo';
 import Limiter from '@containers/Limiter';
+import Carrito from '@elements/Carrito';
 
 /* styles */
 import utilStyles from '@styles/utils';
@@ -19,6 +20,7 @@ function Header(props) {
                             <Logo />
                         </a>
                     </Link>
+                    <Carrito />
                 </Limiter>
             </header>
             <style jsx>{utilStyles}</style>

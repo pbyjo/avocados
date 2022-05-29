@@ -1,0 +1,55 @@
+.item_container-page {
+    width: 100%;
+    height: max-content;
+    flex-wrap: wrap;
+    padding: calc($padding * 2) 0;
+    @include flex-center;
+
+    & > figure {
+        width: 45%;
+        @include flex-center;
+    }
+
+    & > div {
+        width: 55%;
+        @include flex_center-column;
+        align-items: flex-start;
+
+        & > h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        & > h3 {
+            font-size: .8rem;
+            font-style: italic;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: rgba($color: $primaryColor, $alpha: .5);
+        }
+
+        & > p {
+            width: 90%;
+            color: $grayColorText;
+            font-weight: 500;
+            line-height: 1.5rem;
+        }
+
+        & > span {
+            @include flex_row-center;
+            margin-bottom: calc($marginGlobal / 3);
+            & > p:nth-child(1) {
+                font-size: 1rem;
+                font-weight: 700;
+                color: $blackColor;
+            }
+            & > p:nth-child(2) {
+                font-size: .8rem;
+                font-style: italic;
+                font-weight: 500;
+                margin-left: calc($marginGlobal / 3);
+                color: $grayColorText;
+            }
+        }
+    }
+}

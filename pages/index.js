@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Link from 'next/link'
 
 /* Components */
+import InfoItem from "@components/InfoItem";
+import Extra from "@components/Extra";
 import Layout from "@containers/Layout";
 
 const url = '/api/avo'
@@ -21,7 +23,6 @@ function Home(props) {
                 const result = await fetch(url)
                 const data = await result.json()
                 const avoList = data.data
-                const image = avoList.map(avo => avo.image)
                 setLoading(false)
                 return (setProductList(avoList))
             } catch (error) {
@@ -36,11 +37,12 @@ function Home(props) {
     }, [])
     return (
         <Layout title={title}>
+            <Extra /> 
             <section className={container}>          
                 {
                     loading ?
                     <h1>Loading...</h1> :
-                    productList.map(({id, name, image}) => {
+                    productList.map(({id, name, image, price}) => {
                         console.log(image)
                         return (
                             <article key={id}>
@@ -53,7 +55,7 @@ function Home(props) {
                                         />
                                     </a>
                                 </Link>
-                                <h2>{name}</h2>
+                                <InfoItem name={name} price={price} />
                             </article>
                         )
                     })

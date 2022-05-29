@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Fragment } from 'react';
 import {useRouter} from 'next/router'
 import Image from 'next/image';
 
+/* Styles */
+import main from '@styles/main.module.scss'
+
 /* Components */
 import Layout from '@containers/Layout';
+import Limiter from '@containers/Limiter';
 
 function productPage() {
     const {query: {productId}} = useRouter()
@@ -35,21 +38,31 @@ function productPage() {
             {
                 loading ?
                 <h1>Loading...</h1> :
-                <Fragment>
+                <Limiter>
                     {
                         product &&
-                        <article>
-                            <img
-                                src={product.image.src} 
-/*                                 width={240} 
-                                height={240}  */
-                            />
-                            <h1>Producto {productId}</h1>
-                            <h2>{product.name}</h2>
-                            <p>{product.attributes.description}</p>
+                        <article className={main['item_container-page']}>
+                            <figure>
+                                <Image
+                                    src={product.image} 
+                                    width={320}
+                                    height={320} 
+                                    alt={product.name}
+                                    loading='lazy'
+                                />
+                            </figure>
+                            <div>
+                                <h1>{product.name}</h1>
+                                <span>
+                                    <p>{product.price}</p>
+                                    <p>La unidad</p>
+                                </span>
+                                <h3>Product-id {productId}</h3>
+                                <p>{product.attributes.description}</p>
+                            </div>
                         </article>
                     }
-                </Fragment>
+                </Limiter>
             }
         </Layout>
     );
