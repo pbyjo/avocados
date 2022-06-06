@@ -294,3 +294,56 @@ export const getServerSideProps = async () => {
 Reto: 
 `https://github.com/jonalvarezz/platzi-nextjs/blob/main/pages/yes-or-no.tsx`
 
+#### UnderTheHood Static Generation: getStaticProps
+
+Esta fn() solo la podemos usar en las páginas y no en algun otro tipo de componente
+
+``` tsx
+export const getStaticProps = async () => {
+    const response = await fetch()
+    const {data: productList } : 
+        TAPIAvoResponse = await response.json()
+
+    return {
+        props: {
+            productList,
+        },
+    }
+}
+```
+
+Funciona de igual forma que getServerSideProps. A diferencia del server side el cual funciona on demand, cada vez que hay un request del usuario el server debe hacer otro request a la API que deseemos consumir. En cambio de esta manera este request solo se da una sola vez, cuando lo compilamos
+
+RESUMEN: Esta manera de hacer Request nos ayuda de una manera increíble de tal forma que los datos estén directamente listos.
+
+#### UnderTheHood Static Dynamic Static Generation: getStaticPaths
+
+``` tsx
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await fetch('https://platzi-avo.vercel.app/api/avo')
+  const { data }: TAPIAvoResponse = await response.json()
+
+  const paths = data.map(({ id }) => ({ params: { id } }))
+
+  return {
+    // Statically generate all paths
+    paths,
+    // Display 404 for everything else
+    fallback: false,
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  // params contains the post `id`.
+  // If the route is like /posts/1, then params.id is 1
+  const response = await fetch(
+    `https://platzi-avo.vercel.app/api/avo/${params?.id}`
+  )
+  const product = await response.json()
+
+  // Pass post data to the page via props
+  return { props: { product } }
+}
+```
+
+Con esta configuración en nuestra ruta dinamica `[prodcutid].js` estamos usando static paths, la condicion es siempre usar en conjunto static props. Obligatorio para renderizar de forma dinámica
