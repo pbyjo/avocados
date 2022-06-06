@@ -206,3 +206,31 @@ Tambien podriamos pasar estos estilos por props o mejor aún utilizarlo en el re
 
 #### Finalizando las páginas
 
+Gracias a useRouter y las páginas dinámicas podemos crear una ruta por cada producto al solo tener un archivo para todas las rutas dinamicas.
+Tenemos un footer que agregaremos en Layout, un carrito y una pagina acerca de información sobre la tienda.
+
+#### Utilizando vercel para deploy
+
+Al conectar github con vercel podemos hacer deploy de forma facil al darles permisos para crear el build y hostearlo de manera automática.
+
+### M_ Data Fetching y Pre-rendering
+
+#### Introducción a los pre-render modes
+
+CSR ➡ ❌ Afecta el SEO
+✔ algo positivo no tenemos problemas de TTFB (Time To First Byte)
+
+SSR ➡ ❌ Afecta el redimiendo de nuestro sitio web con el TTFB (Time To First Byte)
+✔ algo positivo es que mejora el SEO
+
+SSG ➡ ❎ Lo mejor de los dos mundos
+✔ No tenemos problemas de TTFB ni tampoco con el SEO
+-----
+Client Side: el código se ejecuta en el navegador y tendremos problemas con el SEO
+SSR: El contenido se ejecuta en el servidor, para contenido dinámico, y ésto permite que se pueda indexar
+SSG: El contenido se genera en el deploy, ayuda al seo, pero no recomendable para contenido muy dinamico
+
+#### UnderTheHood Server Side Rendering: getServerSideProps
+
+
+

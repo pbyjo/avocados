@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import Link from 'next/link'
 
+export const getServerSideProps = async (params) => {
+    return {
+        props: {
+        
+        }
+    }
+}
+
 /* Components */
 import InfoItem from "@components/InfoItem";
 import Extra from "@components/Extra";
