@@ -232,5 +232,65 @@ SSG: El contenido se genera en el deploy, ayuda al seo, pero no recomendable par
 
 #### UnderTheHood Server Side Rendering: getServerSideProps
 
+Para realizar server side rendering next nos provee una fn() llamada `getServerSideProps` aqui es donde haremos la llamada a nuestra api de forma asincrona.
 
+Esta fn() reemplazaria useEffect() ya que este hook se renderiza del lado del cliente.
+
+`getServerSideProps` no acepta rutas relativas sino absolutas con dominio incluido, y necesita hacer un fetch de forma isomorfica ya que como funciona del lado del servidor no podemos hacer fetching desde el objeto window.
+
+``` js 
+import fetch from 'isomorphic-unfetch'
+
+export const getServerSideProps = async () => {
+    const loading = true;
+    const result = await fetch(url)
+    const data = await result.json()
+    const productList = data.data
+    loading = !loading;
+    return {
+        props: {
+            productList,
+        }
+    }
+}
+```
+
+Puede ser un fetch o se puede hacer uan consulta directa a la base de datos:
+
+``` js 
+export const getServerSideProps = async () => {
+  const results = await query(`
+      SELECT * FROM playeras
+      ORDER BY id DESC
+  `);
+
+  return {
+    props: {
+      shirts: JSON.parse(JSON.stringify(results)),
+    },
+  };  
+};
+```
+
+Una alternativa al hardcoding para actualizar la URL de la API de la aplicación es crear un archivo index.ts en una carpeta config: 
+
+``` tsx
+const dev = process.env.NODE_ENV !== 'production';
+
+export const server = dev ? 'http : //localhost:3000' : 'URL Vercel de tu App'; 
+// Cambiará dependiendo de la variable de entorno NODE_ENV
+```
+
+Y en tu archivo index.tsx reemplazas el string construido de fetch API, con la constante server que exportaste en el archivo index.ts de la carpeta config.
+
+``` tsx
+import { server } from '../config'; // Importas la constante server
+
+export const getServerSideProps = async () => {
+
+  const response = await fetch(`${server}/api/avo`); // La agregas en Fetch API
+```
+
+Reto: 
+`https://github.com/jonalvarezz/platzi-nextjs/blob/main/pages/yes-or-no.tsx`
 

@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from 'next/link'
 
-export const getServerSideProps = async (params) => {
-    return {
-        props: {
-        
-        }
-    }
-}
-
 /* Components */
 import InfoItem from "@components/InfoItem";
 import Extra from "@components/Extra";
@@ -18,31 +10,35 @@ const url = '/api/avo'
 
 function Home(props) {
     const title = 'Home'
-    const [productList, setProductList] = useState()
     const [loading, setLoading] = useState(true)
+    const [productList, setProductList] = useState()
 
     /* ClassNames */
     const {container} = props
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(loading)
         const fetchData = async () => {
             try {
                 const result = await fetch(url)
                 const data = await result.json()
                 const avoList = data.data
-                setLoading(false)
+                console.log(avoList)
+                setLoading(!loading)
                 return (setProductList(avoList))
             } catch (error) {
                 console.log(error)
             }
         }
         fetchData()
+        
         /* window.fetch(url)
         .then(response => response.json())
         .then(json => console.log(json.data))
         .then(json => setProductList(json)) */
     }, [])
+
+
     return (
         <Layout title={title}>
             <Extra /> 
