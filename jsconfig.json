@@ -6,6 +6,7 @@
             "@elements/*": ["elements/*"],
             "@containers/*": ["containers/*"],
             "@database/*": ["database/*"],
+            "@config/*": ["config/*"],
             "@pages/*": ["pages/*"],
             "@public/*": ["public/*"],
             "@images/*": ["public/images/*"],

@@ -4,7 +4,8 @@ import LogoIcon from '@images/logo-avo.png';
 /* Styles */
 import main from "@styles/main.module.scss";
 
-function Logo() {
+function Logo(props) {
+    const {text} = props;
     return (
             <figure className={main['figure-logo']}>
                 <Image 
@@ -14,7 +15,7 @@ function Logo() {
                     loading='eager'
                     alt='logo'
                 />
-                <h3>VOCADOS</h3>
+                <h3>{text}</h3>
             </figure>
     );
 }

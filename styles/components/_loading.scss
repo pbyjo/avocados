@@ -1,0 +1,6 @@
+.loading {
+    width: 100%;
+    height: max-content;
+    min-height: 300px;
+    @include flex-center;
+}

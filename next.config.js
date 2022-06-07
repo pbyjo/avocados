@@ -3,4 +3,18 @@ const nextConfig = {
   reactStrictMode: true,
 }
 
-module.exports = nextConfig
+async function rewrites() {
+  return [
+    {
+              // Nueva ruta
+      source: '/avocado/:path*',
+              // De que ruta vendrá
+      destination: '/product/:path*',
+    },
+  ]
+}
+
+module.exports = {
+  nextConfig,
+  rewrites: rewrites(),
+}

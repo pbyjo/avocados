@@ -277,7 +277,7 @@ Una alternativa al hardcoding para actualizar la URL de la API de la aplicación
 ``` tsx
 const dev = process.env.NODE_ENV !== 'production';
 
-export const server = dev ? 'http : //localhost:3000' : 'URL Vercel de tu App'; 
+export const server = dev ? 'http : //localhost:3000' : 'URL Vercel de tu App';
 // Cambiará dependiendo de la variable de entorno NODE_ENV
 ```
 
@@ -346,4 +346,84 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 }
 ```
 
-Con esta configuración en nuestra ruta dinamica `[prodcutid].js` estamos usando static paths, la condicion es siempre usar en conjunto static props. Obligatorio para renderizar de forma dinámica
+Con esta configuración en nuestra ruta dinamica `[prodcutid].js` estamos usando static paths, la condicion es siempre usar en conjunto static props. Obligatorio para renderizar de forma dinámica.
+
+#### Otras formas de hacer deploy de una app NextJS
+
+✈️ Exportando la pagina a archivos estáticos
+
+Si tenemos una pagina estatica podemos exportarla a archivos netamente HTML, CSS y JS. De tal manera que no necesitemos un servidor especializado 👀 OJO solo cuando tenemos el proyecto con Archivos estáticos de otra forma no convertirá lo que este de lado del servidor.
+
+Para configurar necesitamos incluir estas caracteristicas en Next.js
+
+``` js
+"scripts": {
+    "export": "next export",
+},
+```
+
+Se recomienda previamente compilar nuestra aplicación con el comando build.
+
+RESUMEN: Con Next export convertimos nuestro proyecto a archivos netamente HTML, CSS y JS.
+
+#### Mide Performance en NextJS
+
+📈 Performance
+
+Hydration - tiempo en que el JS de React comienza a funcionar
+
+FCP - First Content Paint
+
+TTFB - Time to first bite, indicador del tiempo en requerir cosas de otro servidor
+
+Next.js nos ayuda bastante con herramientas de performance.
+
+Para ello dentro de _app.js agregamos y exportamos la función reportWebVitals, este recibe un parámetro llamado metric.
+
+``` js 
+export function reportWebVitals(metric) {
+  console.log(metric)
+  // analytics - calibre
+  // serverAnulicts.log(metric)
+}
+```
+
+Esto nos imprime parámetros los cuales lo podemos enviar a servidores de análisis.
+
+RESUMEN: Next.js nos da herramientas de desarrollo para métricas de carga de sitios
+
+#### ¿Qué será de NextJS en los próximos años?
+
+Ya se encuentra disponible la version estable** Next.js 10** que incluye Incremental Static Regeneration.
+
+Es como un memo, que guarda el html plano la primera vez que se encuentra el link y luego te lo guarda como estatico.
+
+#### Link y Proxy
+
+    Ahora al momento de usar el componente Link no es necesario especificar la propiedad as
+    Solo debemos poner el href poniendo el link real
+
+``` jsx
+<Link href={`/product/${id}`}>
+    ...
+</Link>
+```
+
+Podemos crear rutas que mostraran el contenido de otras rutas dentro de nuestra aplicación web
+    Creamos un archivo en la ruta del proyecto next.config.js
+
+``` js 
+module.exports = {
+      async rewrites() {
+        return [
+        {
+                // Nueva ruta
+        source: '/avocado/:path*',
+                // De que ruta vendrá
+        destination: '/product/:path*',
+        },
+    ]
+    },
+}
+```
+

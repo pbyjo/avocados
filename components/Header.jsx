@@ -17,7 +17,7 @@ function Header(props) {
                 <Limiter className={main['limiter']}>
                     <Link href="/">
                         <a>
-                            <Logo />
+                            <Logo text={'AVOCADOS'} />
                         </a>
                     </Link>
                     <Carrito />
